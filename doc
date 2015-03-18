@@ -1,0 +1,4 @@
+var todoList = element.all(by.repeater('todo in todos'));
+    todoList.count().then(function(data){
+	console.log(data);
+	});
