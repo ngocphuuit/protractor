@@ -18,31 +18,29 @@ describe('livemix page', function() {
 		return message;
   }
 
-  function per(element1, element){
-		// var i = 0;
-		element.getText().then(function(value){
-			// text = Number(value.toString().trim().split('%')[0]);
+  function percent(element, element1){
+		element1.getText().then(function(value){
 			if (Number(value.toString().trim().split('%')[0]) < 100){
-				element1.click();
-				per(element1, element);
+				element.click().then(function(){
+					percent(element, element1);
+				});
 			} ;
-			// return Number(value.toString().trim().split('%')[0]);
 		});
 	}
 
 	beforeEach(function(){
-		browser.get('http://nightly.livemix.tv/shows/1');
+		browser.get(params.url+'shows/1');
 	});
 
-	it('should vote action', function(){
-		getid('username').sendKeys('nopunguyen@gmail.com');
-    getid('password').sendKeys('123123123');
-    getid('loginBtn').click();
-    getcss('[href="/shows/1"]').click();
-		// getcss('img.mCS_img_loaded:nth-child(2)').click();
-		getcss('ul#lstRoomActions li:nth-child(2) div.livemax_actives img.mCS_img_loaded').click();
-		expect(getcss('[data-notify-text=""]').getInnerHtml()).toEqual('Bạn vừa sử dụng -10<img src="/images/dcoin.png" width="12" height="12">');
-	});
+	// it('should vote action', function(){
+	// 	getid('username').sendKeys(params.username);
+	// 	getid('password').sendKeys(params.password);
+	// 	getid('loginBtn').click();
+	// 	getcss('[href="/shows/1"]').click();
+	// 	getcss('img.mCS_img_loaded:nth-child(2)').click();
+	// 	getcss('ul#lstRoomActions li:nth-child(2) div.livemax_actives img.mCS_img_loaded').click();
+	// 	expect(getcss('[data-notify-text=""]').getInnerHtml()).toEqual('Bạn vừa sử dụng -10<img src="/images/dcoin.png" width="12" height="12">');
+	// });
 
 	// it('should not chat in 5s', function(){
 	// 	getid('message').sendKeys('Hello');
@@ -72,24 +70,46 @@ describe('livemix page', function() {
 	// });
 
 	// it('auto vote', function(){
-	// 	console.log(getcss('ul#lstRoomActions li').length);
-	// 	// var money = expect(getid('usermoney').getInnerHtml());
-	// 	// console.log(money);
-	// 	for(var y = 1; y< 15; y++){
-	// 		var a = getcss('ul#lstRoomActions li:nth-child('+y+') div.livemax_actives img.mCS_img_loaded');
-	// 		var pro = getcss('ul#lstRoomActions li:nth-child('+y+') div.livemax_actives span.livemax_actives_sp');
-	// 		per(a, pro);
-	// 	}
+	// 	getid('username').sendKeys(params.login.username);
+	// 	getid('password').sendKeys(params.login.password);
+	// 	getid('loginBtn').click().then(function(){
+	// 		getcss('[href="/shows/1"]').click().then(function(){
+	// 			for(var y = 1; y< 15; y++){
+	// 				var a = getcss('ul#lstRoomActions li:nth-child('+y+') div.livemax_actives img.mCS_img_loaded');
+	// 				var pro = getcss('ul#lstRoomActions li:nth-child('+y+') div.livemax_actives span.livemax_actives_sp');
+	// 				percent(a, pro);
+	// 			}
+	// 		});
+	// 	});
 	// });
 
 	it('auto send gift', function(){
+		getid('username').sendKeys(params.login.username);
+		getid('password').sendKeys(params.login.password);
+		getid('loginBtn').click();
+			getcss('[href="/shows/1"]').click();
 		var i = 0;
-		while(i < 10){
-			getcss('ul.video-live-items-list li:nth-child(1)').click();
-			getid('quantity_gift').sendKeys(0);
-			getcss('.modal-footer a.btn_chatcoin:nth-child(2)').click();
+		while(i < 100){
+			for (var y = 1; y < 11; y++) {
+				getcss('ul.video-live-items-list li:nth-child('+y+') a').click();
+				getid('quantity_gift').sendKeys(0);
+				getcss('.modal-footer a.btn_chatcoin:nth-child(2)').click();
+			};
 			i++;
 		}
 	});
+
+	// it('auto chat', function(){
+	// 	getid('username').sendKeys(params.login.username);
+ //    getid('password').sendKeys(params.login.password);
+ //    getid('loginBtn').click().then(function(){
+ //    	getcss('[href="/shows/1"]').click().then(function(){
+ //    		setInterval(function(){
+	// 				getid('message').sendKeys('Auto chat , 5s chat 1 lan');
+	// 				getid('btnSendChat').click();
+	// 			}, 30000);
+ //    	});
+ //    });
+	// });
 
 });

@@ -1,5 +1,5 @@
 describe('register page', function() {
-
+  var params = browser.params;
   // beforeEach(function() {
   //   browser.get('http://nightly.livemix.tv/users/register');
   // });
@@ -12,7 +12,7 @@ describe('register page', function() {
   }
 
   beforeEach(function(){
-    browser.get('http://nightly.livemix.tv/users/register');
+    browser.get(params.url+'users/register');
   });
 
   it('should not create account if missing username', function() {
@@ -66,7 +66,7 @@ describe('register page', function() {
     getid('password').sendKeys('12345678');
     getid('password2').sendKeys('12345678');
     getcss('a.login-btn').click();
-    expect(browser.getCurrentUrl()).toMatch('http://nightly.livemix.tv/');
+    expect(browser.getCurrentUrl()).toMatch(params.url);
   });
 
 });

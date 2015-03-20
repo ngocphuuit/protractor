@@ -1,5 +1,5 @@
 describe('login page', function() {
-
+  var params = browser.params;
   // browser.get('http://nightly.livemix.tv/users/login');
   // var username = browser.driver.findElement(by.id('username'));
   // var password = browser.driver.findElement(by.id('password'));
@@ -13,7 +13,7 @@ describe('login page', function() {
   }
 
   beforeEach(function() {
-    browser.get('http://nightly.livemix.tv/users/login');
+    browser.get(params.url+'users/login');
   });
 
   it('should not login if wrong password', function() {
@@ -59,10 +59,10 @@ describe('login page', function() {
   });
 
   it('should login with correct username and password', function(){
-    getid('username').sendKeys('nopunguyen@gmail.com');
-    getid('password').sendKeys('123123123');
+    getid('username').sendKeys(params.login.username);
+    getid('password').sendKeys(params.login.password);
     getid('loginBtn').click();
-    expect(browser.getCurrentUrl()).toMatch('http://nightly.livemix.tv/');
+    expect(browser.getCurrentUrl()).toMatch(params.url);
     getcss('[href="/shows/1"]').click();
     // expect(browser.getCurrentUrl()).toMatch('http://livemix.tv/shows/1');
   });
