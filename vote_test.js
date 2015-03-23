@@ -31,12 +31,7 @@ describe('auto vote', function() {
 			getcss('[href="/shows/1"]').click().then(function(){
 				for(var y = 1; y< 15; y++){
 					var a = getcss('ul#lstRoomActions li:nth-child('+y+') div.livemax_actives img.mCS_img_loaded');
-					// var a = getcss('ul#lstRoomActions li:nth-child('+y+') div.livemax_actives img.aasass');
 					var pro = getcss('ul#lstRoomActions li:nth-child('+y+') div.livemax_actives span.livemax_actives_sp');
-					// var hasClass = $('ul#lstRoomActions li:nth-child('+y+') div.livemax_actives img.mCS_img_loaded').classList.contains('some-class');
-					// console.log(hasClass);
-
-					expect(getcss('ul#lstRoomActions li:nth-child('+y+') div.livemax_actives img.aasass').isDisplayed()).toBe(true);
 					percent(a, pro);
 				}
 			});

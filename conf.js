@@ -1,6 +1,6 @@
 exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
-  specs: ['sendgift.js'],
+  specs: ['vote_test.js'],
   multiCapabilities: [{
     browserName: 'firefox'
   }],
